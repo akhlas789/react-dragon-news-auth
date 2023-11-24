@@ -1,8 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
 import NavBar from "../Shared/NavBar/NavBar";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
+
     const handaleRegister = (event) => {
         event.preventDefault();
         console.log(event.currentTarget)
@@ -12,7 +16,16 @@ const Register = () => {
         const photo = form.get('photo')
         const email = form.get('email')
         const password = form.get('password')
-        console.log(name,photo,email,password)
+        console.log(name, photo, email, password)
+
+        // create user
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
     }
     return (

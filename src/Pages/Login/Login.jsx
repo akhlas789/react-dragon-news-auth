@@ -1,14 +1,27 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
 import NavBar from "../Shared/NavBar/NavBar";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
+    const { singIn } = useContext(AuthContext)
+
     const handaleLogin = (event) => {
         event.preventDefault();
         console.log(event.currentTarget);
         const form = new FormData(event.currentTarget)
-        console.log(form.get('password'))
+        const email = form.get('email')
+        const password = form.get('password')
+        console.log(email, password)
 
+        singIn(email, password)
+            .then(resut => {
+                console.log(resut.user)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     return (
         <div>
