@@ -2,20 +2,37 @@
 import { Link } from "react-router-dom";
 import NavBar from "../Shared/NavBar/NavBar";
 
-const Login = () => {
-    const handaleLogin = (event) => {
+const Register = () => {
+    const handaleRegister = (event) => {
         event.preventDefault();
-        console.log(event.currentTarget);
+        console.log(event.currentTarget)
         const form = new FormData(event.currentTarget)
-        console.log(form.get('password'))
+
+        const name = form.get('name')
+        const photo = form.get('photo')
+        const email = form.get('email')
+        const password = form.get('password')
+        console.log(name,photo,email,password)
 
     }
     return (
         <div>
             <NavBar></NavBar>
             <div>
-                <h2 className="text-3xl my-10 text-center">Please Login</h2>
-                <form onSubmit={handaleLogin} className="md:w-3/4 lg:w-1/2 mx-auto p-10">
+                <h2 className="text-3xl my-10 text-center">Please Register</h2>
+                <form onSubmit={handaleRegister} className="md:w-3/4 lg:w-1/2 mx-auto p-10">
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input type="name" name="name" placeholder="Name" className="input input-bordered" required />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Photo URL</span>
+                        </label>
+                        <input type="photo" name="photo" placeholder="photo URL" className="input input-bordered" required />
+                    </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
@@ -35,10 +52,10 @@ const Login = () => {
                         <button className="btn btn-primary">Login</button>
                     </div>
                 </form>
-                <p className="text-center mt-4">Don't have an account <Link className="text-blue-600 font-bold" to='/register'>Register</Link> </p>
+                <p className="text-center mt-4">Alreday have an account <Link className="text-blue-600 font-bold" to='/login'>Login</Link> </p>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default Register;
